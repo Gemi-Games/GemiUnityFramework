@@ -31,17 +31,7 @@ namespace GemiFramework
                 {
                     if (s_Instance == null)
                     {
-                        //s_Instance = (T)FindObjectOfType(typeof(T));
-
                         s_Instance = FindObjectOfType<T>();
-
-                        //if (FindObjectsOfType(typeof(T)).Length > 1)
-                        //{
-                        //    Debug.LogError("[Singleton] Something went really wrong " +
-                        //        " - there should never be more than 1 singleton!" +
-                        //        " Reopenning the scene might fix it.");
-                        //    return s_Instance;
-                        //}
 
                         if (s_Instance == null)
                         {
