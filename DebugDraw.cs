@@ -27,11 +27,14 @@ namespace GemiFramework
     {
         public static void Draw3DCrosshair(Vector3 lPosition, float lSize, float lDuration = 0f)
         {
+#if UNITY_EDITOR
             Draw3DCrosshair(lPosition, lSize, Color.green, lDuration);
+#endif
         }
 
         public static void Draw3DCrosshair(Vector3 lPosition, float lSize, Color lColour, float lDuration = 0f)
         {
+#if UNITY_EDITOR
             Vector3 lXSize = Vector3.right * lSize / 2f;
             Vector3 lYSize = Vector3.up * lSize / 2f;
             Vector3 lZSize = Vector3.forward * lSize / 2f;
@@ -49,6 +52,7 @@ namespace GemiFramework
             Debug.DrawLine(lStart1, lEnd1, lFinalColour, lDuration);
             Debug.DrawLine(lStart2, lEnd2, lFinalColour, lDuration);
             Debug.DrawLine(lStart3, lEnd3, lFinalColour, lDuration);
+#endif
         }
     }
 }
