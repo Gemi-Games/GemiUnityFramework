@@ -50,51 +50,51 @@ namespace GemiFramework
         {
             int lKey = lPrefab.gameObject.GetInstanceID();
 
-            if (!m_Dictionary.ContainsKey(lKey))
+            if (m_Dictionary.ContainsKey(lKey))
+                return;
+
+            if (m_PrefabIDs == null)
+                m_PrefabIDs = new List<int>(64);
+
+            m_PrefabIDs.Add(lKey);
+
+            GameObject lPoolHolder = new GameObject(lPrefab.name + " Pool");
+            lPoolHolder.transform.parent = transform;
+            lPoolHolder.isStatic = true;
+
+            PoolInfo lInfo = new PoolInfo();
+            lInfo.PoolHolder = lPoolHolder;
+            lInfo.PoolSize = lPoolSize;
+
+            m_Dictionary.Add(lKey, new Queue<ObjectInstance>());
+            m_Infos.Add(lKey, lInfo);
+
+            if (lReverseOrder)
             {
-                if (m_PrefabIDs == null)
-                    m_PrefabIDs = new List<int>(64);
-
-                m_PrefabIDs.Add(lKey);
-
-                GameObject lPoolHolder = new GameObject(lPrefab.name + " Pool");
-                lPoolHolder.transform.parent = transform;
-                lPoolHolder.isStatic = true;
-
-                PoolInfo lInfo = new PoolInfo();
-                lInfo.PoolHolder = lPoolHolder;
-                lInfo.PoolSize = lPoolSize;
-
-                m_Dictionary.Add(lKey, new Queue<ObjectInstance>());
-                m_Infos.Add(lKey, lInfo);
-
-                if (lReverseOrder)
+                for (int i = lPoolSize - 1; i >= 0; i--)
                 {
-                    for (int i = lPoolSize - 1; i >= 0; i--)
-                    {
-                        GameObject lObject = Instantiate(lPrefab);
-                        lObject.isStatic = true;
+                    GameObject lObject = Instantiate(lPrefab);
+                    lObject.isStatic = true;
 
-                        lObject.transform.parent = lPoolHolder.transform;
+                    lObject.transform.parent = lPoolHolder.transform;
 
-                        ObjectInstance lInstance = new ObjectInstance(lObject);
+                    ObjectInstance lInstance = new ObjectInstance(lObject);
 
-                        m_Dictionary[lKey].Enqueue(lInstance);
-                    }
+                    m_Dictionary[lKey].Enqueue(lInstance);
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < lPoolSize; i++)
                 {
-                    for (int i = 0; i < lPoolSize; i++)
-                    {
-                        GameObject lObject = Instantiate(lPrefab);
-                        lObject.isStatic = true;
+                    GameObject lObject = Instantiate(lPrefab);
+                    lObject.isStatic = true;
 
-                        lObject.transform.parent = lPoolHolder.transform;
+                    lObject.transform.parent = lPoolHolder.transform;
 
-                        ObjectInstance lInstance = new ObjectInstance(lObject);
+                    ObjectInstance lInstance = new ObjectInstance(lObject);
 
-                        m_Dictionary[lKey].Enqueue(lInstance);
-                    }
+                    m_Dictionary[lKey].Enqueue(lInstance);
                 }
             }
         }
