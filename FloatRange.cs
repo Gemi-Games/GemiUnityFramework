@@ -30,7 +30,7 @@ namespace GemiFramework
         public float Min;
         public float Max;
 
-        public float Value;
+        public float NormPosition;
 
         public static FloatRange Default
         {
@@ -54,12 +54,12 @@ namespace GemiFramework
         {
             Min = lMin;
             Max = lMax;
-            Value = lValue;
+            NormPosition = lValue;
         }
 
         public float GetValue()
         {
-            return Min + (Max - Min) * Mathf.Clamp01(Value);
+            return Min + (Max - Min) * Mathf.Clamp01(NormPosition);
         }
 
         public float GetValueFromNormalisedPosition(float lNormalisedPosition)
