@@ -84,6 +84,11 @@ namespace GemiFramework
             return new Vector3(lV2.x, lV2.y, 0f);
         }
 
+        public static Vector3 ToVector3(this Vector2Int lV2)
+        {
+            return new Vector3(lV2.x, lV2.y, 0f);
+        }
+
         public static Vector2 Rotate(this Vector2 lV2, float lAngle)
         {
             return Quaternion.Euler(0f, 0f, lAngle) * lV2;
