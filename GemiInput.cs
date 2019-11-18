@@ -31,11 +31,56 @@ namespace GemiFramework
         Horizontal = 1,
         Vertical = 2,
     }
+	
     public enum AxisDirection
     {
         Negative = -1,
         Neutral = 0,
         Positive = 1,
+    }
+
+    public struct KeyMapping
+    {
+        public const string POSITIVE_STRING = "Up";
+        public const string NEGATIVE_STRING = "Down";
+
+        public KeyCode Key;
+        public string AxisName;
+        public AxisDirection Direction;
+
+        public KeyMapping(KeyCode lKey)
+        {
+            Key = lKey;
+            AxisName = null;
+            Direction = 0;
+        }
+
+        public KeyMapping(string lAxisName, AxisDirection lDirection)
+        {
+            Key = KeyCode.None;
+
+            AxisName = lAxisName;
+            Direction = lDirection;
+        }
+
+        public override string ToString()
+        {
+            if (AxisName != null)
+            {
+                string lDir = "N/A";
+
+                if (Direction > 0)
+                    lDir = POSITIVE_STRING;
+                else if (Direction < 0)
+                    lDir = NEGATIVE_STRING;
+
+                return string.Concat(AxisName, lDir);
+            }
+            else
+            {
+                return Key.ToString();
+            }
+        }
     }
 
     public static class GemiInput
@@ -174,54 +219,5 @@ namespace GemiFramework
 
             return false;
         }
-    }
-
-    public struct KeyMapping
-    {
-        public const string POSITIVE_STRING = "Up";
-        public const string NEGATIVE_STRING = "Down";
-
-        public KeyCode Key;
-        public string AxisName;
-        public AxisDirection Direction;
-
-        public KeyMapping(KeyCode lKey)
-        {
-            Key = lKey;
-            AxisName = null;
-            Direction = 0;
-        }
-
-        public KeyMapping(string lAxisName, AxisDirection lDirection)
-        {
-            Key = KeyCode.None;
-
-            AxisName = lAxisName;
-            Direction = lDirection;
-        }
-
-        public override string ToString()
-        {
-            if (AxisName != null)
-            {
-                string lDir = "N/A";
-
-                if (Direction > 0)
-                    lDir = POSITIVE_STRING;
-                else if (Direction < 0)
-                    lDir = NEGATIVE_STRING;
-
-                return string.Concat(AxisName, lDir);
-            }
-            else
-            {
-                return Key.ToString();
-            }
-        }
-
-        //public static bool operator ==()
-        //{
-
-        //}
     }
 }

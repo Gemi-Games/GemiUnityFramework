@@ -94,6 +94,11 @@ namespace GemiFramework
             return new Vector2Int((int)(lV3.x + 0.5f), (int)(lV3.y + 0.5f));
         }
 
+        public static Vector2Int ToVector2IntFloor(this Vector3 lV3)
+        {
+            return new Vector2Int((int)lV3.x, (int)lV3.y);
+        }
+		
         public static Vector2 ToVector2(this Vector4 lV4)
         {
             return new Vector2(lV4.x, lV4.y);
