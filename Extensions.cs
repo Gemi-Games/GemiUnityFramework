@@ -66,25 +66,9 @@ namespace GemiFramework
 
     public static class Extensions
     {
-        public static Vector3 AddVector2(this Vector3 lV3, Vector2 lV2)
-        {
-            lV3.x += lV2.x;
-            lV3.y += lV2.y;
-
-            return lV3;
-        }
-
-        public static Vector2 ToVector2(this Vector3 lV3)
-        {
-            return new Vector2(lV3.x, lV3.y);
-        }
+        // Vector2
 
         public static Vector3 ToVector3(this Vector2 lV2)
-        {
-            return new Vector3(lV2.x, lV2.y, 0f);
-        }
-
-        public static Vector3 ToVector3(this Vector2Int lV2)
         {
             return new Vector3(lV2.x, lV2.y, 0f);
         }
@@ -92,6 +76,33 @@ namespace GemiFramework
         public static Vector2 Rotate(this Vector2 lV2, float lAngle)
         {
             return Quaternion.Euler(0f, 0f, lAngle) * lV2;
+        }
+
+        // Vector2Int
+
+        public static Vector2 ToVector2(this Vector2Int lV2)
+        {
+            return new Vector2(lV2.x, lV2.y);
+        }
+
+        public static Vector3 ToVector3(this Vector2Int lV2)
+        {
+            return new Vector3(lV2.x, lV2.y, 0f);
+        }
+
+        // Vector3
+
+        public static Vector2 ToVector2(this Vector3 lV3)
+        {
+            return new Vector2(lV3.x, lV3.y);
+        }
+
+        public static Vector3 AddVector2(this Vector3 lV3, Vector2 lV2)
+        {
+            lV3.x += lV2.x;
+            lV3.y += lV2.y;
+
+            return lV3;
         }
 
         public static Vector2Int ToVector2Int(this Vector3 lV3)
@@ -103,11 +114,15 @@ namespace GemiFramework
         {
             return new Vector2Int((int)lV3.x, (int)lV3.y);
         }
-		
+
+        // Vector4
+
         public static Vector2 ToVector2(this Vector4 lV4)
         {
             return new Vector2(lV4.x, lV4.y);
         }
+
+        // CapsuleCollider
 
         public static CapsuleCollider2DInfo GetInfo(this CapsuleCollider2D lCapColl)
         {
@@ -163,6 +178,8 @@ namespace GemiFramework
             return info;
         }
 
+        // BoxCollider2D
+
         public static BoxCollider2DInfo GetBoxColliderInfo(this BoxCollider2D lBoxColl)
         {
             BoxCollider2DInfo info = new BoxCollider2DInfo();
@@ -175,6 +192,8 @@ namespace GemiFramework
 
             return info;
         }
+
+        // BoxCollider
 
         public static BoxColliderInfo GetBoxColliderInfo(this BoxCollider lBoxColl)
         {
@@ -209,6 +228,8 @@ namespace GemiFramework
 
             return false;
         }
+
+        // LayerMask
 
         public static int FindFirstLayerIndex(this LayerMask lLayer)
         {
