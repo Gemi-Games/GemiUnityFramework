@@ -192,12 +192,13 @@ namespace GemiFramework
 
             public void Reuse(Vector3 lPosition, Quaternion lRotation)
             {
-                if (m_HasScript)
-                    m_PoolObjectScript.OnSpawn();
-
                 Object.SetActive(true);
+
                 m_Transform.position = lPosition;
                 m_Transform.rotation = lRotation;
+
+                if (m_HasScript)
+                    m_PoolObjectScript.OnSpawn();
             }
         }
     }

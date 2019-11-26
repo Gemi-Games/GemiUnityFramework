@@ -62,7 +62,7 @@ namespace GemiFramework
             return Min + (Max - Min) * Mathf.Clamp01(NormPosition);
         }
 
-        public float GetValueFromNormalisedPosition(float lNormalisedPosition)
+        public float GetValueFromNorm(float lNormalisedPosition)
         {
             return Min + (Max - Min) * lNormalisedPosition;
         }

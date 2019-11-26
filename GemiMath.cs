@@ -26,12 +26,6 @@ namespace GemiFramework
     public static class GemiMath
     {
         public static float ROOT_2 = Mathf.Sqrt(2f);
-
-        public static Vector3 Vector2ToVector3(Vector2 lV2)
-        {
-            Vector3 lV3 = new Vector3(lV2.x, lV2.y, 0f);
-
-            return lV3;
-        }
+        public static float TWO_PI = Mathf.PI * 2f;
     }
 }
