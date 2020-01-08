@@ -74,13 +74,18 @@ namespace GemiFramework
                 else if (Direction < 0)
                     lDir = NEGATIVE_STRING;
 
-                return string.Concat(AxisName, lDir);
+                return string.Concat(AxisName, " ", lDir);
             }
             else
             {
                 return Key.ToString();
             }
         }
+
+        //internal static KeyMapping FromCode(int lCode)
+        //{
+
+        //}
     }
 
     public static class GemiInput

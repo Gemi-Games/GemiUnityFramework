@@ -135,35 +135,37 @@ namespace GemiFramework
 
         public GameObject ReuseObject(GameObject lPrefab)
         {
-            return ReuseObject(lPrefab, Vector3.zero, Quaternion.identity);
+            return ReuseObject(lPrefab, Vector3.zero, Quaternion.identity, 0);
         }
 
         public GameObject ReuseObject(GameObject lPrefab, Vector3 lPosition)
         {
-            return ReuseObject(lPrefab, lPosition, Quaternion.identity);
+            return ReuseObject(lPrefab, lPosition, Quaternion.identity, 0);
         }
 
-        public GameObject ReuseObject(GameObject lPrefab, Vector3 lPosition, Quaternion lRotation, bool lCreatePool = false)
+        public GameObject ReuseObject(GameObject lPrefab, Vector3 lPosition, Quaternion lRotation)
+        {
+            return ReuseObject(lPrefab, lPosition, lRotation, 0);
+        }
+
+        public GameObject ReuseObject(GameObject lPrefab, Vector3 lPosition, Quaternion lRotation, int lPoolSize)
         {
             int lKey = lPrefab.gameObject.GetInstanceID();
 
-            if (m_Dictionary.ContainsKey(lKey))
+            if (!m_Dictionary.ContainsKey(lKey))
             {
-                ObjectInstance lInstance = m_Dictionary[lKey].Dequeue();
-
-                m_Dictionary[lKey].Enqueue(lInstance);
-                lInstance.Reuse(lPosition, lRotation);
-
-                return lInstance.Object;
-            }
-            else if (lCreatePool)
-            {
-                CreatePool(lPrefab, 128);
-
-                return ReuseObject(lPrefab, lPosition, lRotation);
+                if (lPoolSize > 0)
+                    CreatePool(lPrefab, lPoolSize);
+                else
+                    return null;
             }
 
-            return null;
+            ObjectInstance lInstance = m_Dictionary[lKey].Dequeue();
+
+            m_Dictionary[lKey].Enqueue(lInstance);
+            lInstance.Reuse(lPosition, lRotation);
+
+            return lInstance.Object;
         }
 
         public class ObjectInstance
