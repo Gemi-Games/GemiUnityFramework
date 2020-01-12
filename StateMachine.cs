@@ -61,12 +61,7 @@ namespace GemiFramework
             m_Enabled = true;
         }
 
-        public void ChangeState(State<T> lNewState)
-        {
-            ChangeState(lNewState, false);
-        }
-
-        public void ChangeState(State<T> lNewState, bool lChangeToSelf)
+        public void ChangeState(State<T> lNewState, bool lChangeToSelf = false)
         {
             if (CurrentState != null)
             {
