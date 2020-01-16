@@ -39,6 +39,7 @@ namespace GemiFramework
         Positive = 1,
     }
 
+    [Serializable]
     public struct KeyMapping
     {
         public const string POSITIVE_STRING = "Up";
