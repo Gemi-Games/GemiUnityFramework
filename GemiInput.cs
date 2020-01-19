@@ -31,7 +31,7 @@ namespace GemiFramework
         Horizontal = 1,
         Vertical = 2,
     }
-	
+
     public enum AxisDirection
     {
         Negative = -1,
@@ -45,19 +45,25 @@ namespace GemiFramework
         public const string POSITIVE_STRING = "Up";
         public const string NEGATIVE_STRING = "Down";
 
+        public bool Valid;
         public KeyCode Key;
         public string AxisName;
         public AxisDirection Direction;
 
         public KeyMapping(KeyCode lKey)
         {
+            Valid = true;
+
             Key = lKey;
+
             AxisName = null;
             Direction = 0;
         }
 
         public KeyMapping(string lAxisName, AxisDirection lDirection)
         {
+            Valid = true;
+
             Key = KeyCode.None;
 
             AxisName = lAxisName;
@@ -66,9 +72,13 @@ namespace GemiFramework
 
         public override string ToString()
         {
-            if (AxisName != null)
+            if (!Valid)
             {
-                string lDir = "N/A";
+                return "N/A";
+            }
+            else if (AxisName != null && AxisName.Length > 0)
+            {
+                string lDir = "???";
 
                 if (Direction > 0)
                     lDir = POSITIVE_STRING;
@@ -81,6 +91,30 @@ namespace GemiFramework
             {
                 return Key.ToString();
             }
+        }
+
+        public static bool operator ==(KeyMapping l0, KeyMapping l1)
+        {
+            if (!l0.Valid && !l1.Valid)
+                return true;
+            else if (l0.AxisName != null && l0.AxisName.Length > 0)
+            {
+                if (l1.AxisName != null && 
+                    l0.AxisName == l1.AxisName && 
+                    l0.Direction == l1.Direction)
+                    return true;
+                else
+                    return false;
+            }
+            else if (l0.Key == l1.Key)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator !=(KeyMapping l0, KeyMapping l1)
+        {
+            return !(l0 == l1);
         }
 
         //internal static KeyMapping FromCode(int lCode)
@@ -142,7 +176,11 @@ namespace GemiFramework
             {
                 KeyMapping lKey = lKeys[i];
 
-                if (lKey.AxisName != null)
+                if (!lKey.Valid)
+                {
+                    continue;
+                }
+                else if (lKey.AxisName != null && lKey.AxisName.Length > 0)
                 {
                     if (!s_PreviousAxisKey.ContainsKey(lKey.AxisName))
                         s_PreviousAxisKey.Add(lKey.AxisName, false);
@@ -179,7 +217,11 @@ namespace GemiFramework
             {
                 KeyMapping lKey = lKeys[i];
 
-                if (lKey.AxisName != null)
+                if (!lKey.Valid)
+                {
+                    continue;
+                }
+                else if (lKey.AxisName != null && lKey.AxisName.Length > 0)
                 {
                     if (!s_PreviousAxisKey.ContainsKey(lKey.AxisName))
                         s_PreviousAxisKey.Add(lKey.AxisName, false);
@@ -207,7 +249,11 @@ namespace GemiFramework
             {
                 KeyMapping lKey = lKeys[i];
 
-                if (lKey.AxisName != null)
+                if (!lKey.Valid)
+                {
+                    continue;
+                }
+                else if (lKey.AxisName != null && lKey.AxisName.Length > 0)
                 {
                     float lAxisValue = Input.GetAxisRaw(lKey.AxisName);
 
