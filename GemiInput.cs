@@ -172,6 +172,9 @@ namespace GemiFramework
 
         public static bool GetKeyDown(KeyMapping[] lKeys)
         {
+            if (lKeys == null)
+                return false;
+
             for (int i = 0; i < lKeys.Length; i++)
             {
                 KeyMapping lKey = lKeys[i];
@@ -213,6 +216,9 @@ namespace GemiFramework
 
         public static bool GetKeyUp(KeyMapping[] lKeys)
         {
+            if (lKeys == null)
+                return false;
+
             for (int i = 0; i < lKeys.Length; i++)
             {
                 KeyMapping lKey = lKeys[i];
@@ -245,6 +251,9 @@ namespace GemiFramework
 
         public static bool GetKey(KeyMapping[] lKeys)
         {
+            if (lKeys == null)
+                return false;
+
             for (int i = 0; i < lKeys.Length; i++)
             {
                 KeyMapping lKey = lKeys[i];
