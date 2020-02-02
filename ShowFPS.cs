@@ -25,6 +25,7 @@ namespace GemiFramework
 {
     public class ShowFPS : MonoBehaviour
     {
+#if DEBUG
         int m_FrameCount;
         int m_FrameCountCurrent;
 
@@ -53,7 +54,8 @@ namespace GemiFramework
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(25, 25, 100, 30), string.Concat(m_FrameCountCurrent.ToString(), " FPS"));
+            GUI.Label(new Rect(1, 1, 128, 32), string.Concat(m_FrameCountCurrent.ToString(), " FPS"));
         }
+#endif
     }
 }
